@@ -1,0 +1,16 @@
+{
+  "id": "4532130",
+  "name": "qq",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "34631586",
+      "name": "心",
+      "font_class": "xin",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    }
+  ]
+}

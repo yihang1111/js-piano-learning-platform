@@ -1,0 +1,81 @@
+@primary-color:#1f7ac9; // 全局主色
+@link-color: #1890ff;// 链接色
+@success-color: #22BF87;// 成功色
+@warning-color: #F67770;// @warning-color: #F67770;// 警告色
+
+@error-color: #F35248;// 错误色
+@like-color:red;// 喜欢色
+
+// 中性色
+@gray-0: #202020;
+@gray-1: #202020;
+@gray-2: #585858;
+@gray-3: #949494;
+@gray-9: #F6F6F8;
+@gray-10: #ffffff;
+
+// 字体
+@font-size-12: 12px;
+@font-size-14: 14px;
+@font-size-16: 16px;
+
+// 间距 padding
+@padding-4: 4px;
+@padding-8: 8px;
+@padding-12: 12px;
+@padding-20: 20px;
+
+// 动画
+@trans:all 0.3s;
+@slow-trans:all 0.1s;
+@fast-trans:all 0.05s;
+
+// 全局控制
+body{
+    padding: 0px;
+    margin: 0px;
+    line-height: 1.5;
+    color: @gray-1;
+    font-size: @font-size-14;
+    // background-color: black;
+    transition: all 0.3s; // 全局的动画效果0.3s
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    // 是用于 WebKit 内核的浏览器（比如 Chrome 和 Safari），
+    // 它会使字体在渲染时采用抗锯齿（anti-aliased）的方式，以使字体边缘更加平滑。
+
+    -moz-osx-font-smoothing: grayscale;
+    // 则是用于 Mozilla Firefox 浏览器在 macOS 上的渲染，它会使字体渲染成灰度（grayscale），也有助于提高字体渲染的质量。
+}
+
+p{
+    padding: 0;
+    margin: 0;
+}
+// 清除了段落元素的内外边距，以确保段落之间没有不必要的间距。
+
+li{
+    list-style: none;
+}
+// 清除了列表项的默认样式，使其不显示列表标记。
+
+img{
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+// 清除了图像元素的内外边距，并将其设置为块级元素，以防止它们产生不必要的空白。
+
+a{
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+// 清除了链接元素的下划线，并在鼠标悬停时添加下划线效果。
+
+input,textarea{
+    outline: none;
+}
+// 清除了输入框和文本域的默认轮廓样式，这样在获得焦点时就不会显示轮廓。
