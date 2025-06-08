@@ -1,6 +1,6 @@
 # 项目启动 npm run serve
 
-# 链接后端 C:\Users\Yu\Desktop\郑州大学\毕设demo\server> 
+# 链接后端
 
 # 后端项目 npm install -g nodemon
 
