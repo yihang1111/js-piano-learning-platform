@@ -1,15 +1,19 @@
 <template>
-    <div class="piano-banner">
-        <div class="banner-keys"><a class="router-link-active router-link-exact-active keys"><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i><i class="h"></i><i></i></a>
-        </div>
+  <div class="piano-banner">
+    <div class="banner-keys">
+      <a class="router-link-active router-link-exact-active keys"
+        ><i /><i class="h" /><i /><i class="h" /><i /><i /><i class="h" /><i /><i
+          class="h" /><i /><i class="h" /><i /><i /><i class="h" /><i /><i class="h" /><i /><i /><i
+          class="h" /><i /><i class="h" /><i /><i class="h" /><i /><i /><i class="h" /><i /><i
+          class="h" /><i /><i /><i class="h" /><i /><i class="h" /><i /><i class="h" /><i
+      /></a>
     </div>
+  </div>
 </template>
 
 <script>
-
 export default {
-  props: {
-  },
+  props: {},
   data() {
     return {};
   },
@@ -77,5 +81,4 @@ for num in 1..36
         transform translate(0, 0)
     }
 }
-
 </style>

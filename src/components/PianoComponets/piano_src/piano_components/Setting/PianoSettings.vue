@@ -28,7 +28,7 @@
           class="visible-bar"
           :style="{
             width: `${state.cacheConf.barScale * 100}%`,
-            left: `${(1 - state.cacheConf.barScale) * state.cacheConf.left * 100}%`
+            left: `${(1 - state.cacheConf.barScale) * state.cacheConf.left * 100}%`,
           }"
         />
       </div>
@@ -39,12 +39,10 @@
 </template>
 
 <script>
-import xwSwitch from '@/components/PianoComponets/piano_src/piano_components/Setting/comp/xw-switch.vue'
+import xwSwitch from '@/components/PianoComponets/piano_src/piano_components/Setting/comp/xw-switch.vue';
 import { resize } from '../size';
 import xwButton from '../../piano_comp/xw-comp/xw-button.vue';
 // import settingsMidiPeripheral from './settings-midi-peripheral.vue';
-
-
 
 export default {
   components: {

@@ -1,17 +1,13 @@
 <template>
-    <button
-        type="button"
-        class="xw-button"
-        :class="[type, selected ? 'select' : '']"
-        @click="type !== 'disable' && $emit('click')"
-    >
-        <i
-            v-if="icon"
-            class="iconfont"
-            :class="`icon-${icon}`"
-        />
-        <slot>&nbsp;</slot>
-    </button>
+  <button
+    type="button"
+    class="xw-button"
+    :class="[type, selected ? 'select' : '']"
+    @click="type !== 'disable' && $emit('click')"
+  >
+    <i v-if="icon" class="iconfont" :class="`icon-${icon}`" />
+    <slot>&nbsp;</slot>
+  </button>
 </template>
 
 <script>

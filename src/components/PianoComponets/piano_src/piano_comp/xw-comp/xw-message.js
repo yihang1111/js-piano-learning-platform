@@ -1,4 +1,4 @@
-import { createApp, h } from 'vue'
+import { createApp, h } from 'vue';
 import runtime from '../../piano_lib/runtime';
 import msgComp from './xw-message-comp.vue';
 
@@ -16,7 +16,7 @@ function init() {
     },
     render() {
       return h(msgComp);
-    }
+    },
   });
   msgVue.mount(msgWrapper);
 }
@@ -25,12 +25,7 @@ if (runtime.isClient) {
   init();
 }
 
-
-function open({
-  icon,
-  content,
-  duration = 3000,
-}) {
+function open({ icon, content, duration = 3000 }) {
   if (msgVue) {
     msgVue.open({
       icon,

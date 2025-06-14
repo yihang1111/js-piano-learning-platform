@@ -62,8 +62,9 @@ for (let j = 0, bcount = 0; j < 88; j += 1) {
     const ucode = i < 28 ? ycode : ycode.toLowerCase();
 
     const hj = heiKeyArray.length - 1;
-    heip += `<div data-key='${i}' style="left:${baiKeyWidth * hj
-      + pstOffset[yu]}px;"><span>${i}</span></div>`;
+    heip += `<div data-key='${i}' style="left:${
+      baiKeyWidth * hj + pstOffset[yu]
+    }px;"><span>${i}</span></div>`;
 
     keyNameList[i] = `#${ucode}${sbpnum}`;
 
@@ -92,11 +93,12 @@ for (let i = 1; i < 89; i += 1) {
     }
     const cent = (lefPst + ritPst) / 2;
     let w = ritPst - lefPst;
-    if (w < heiKeyWidth - 4) { (w = heiKeyWidth - 4); }
+    if (w < heiKeyWidth - 4) {
+      w = heiKeyWidth - 4;
+    }
     barPositionArray[i] = [cent - w / 2, w];
   }
 }
-
 
 // console.log(baiKeyArray, heiKeyArray);
 

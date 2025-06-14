@@ -1,136 +1,151 @@
 <template>
-    <label >导航栏：</label>
-    <xwButton  :value="state.hideNavBar" @change="handleHideNavBarChange" />
-    <div class="auto-play" >
-
-        <div class="top-bar" v-show="hideNavBar != true">
-            <div class="logo">
-              <img src="@/assets/images/piano.png" class="logo-img"/>
-              <p class="logo-name">钢琴知识学习系统</p>
-            </div>
-            <div class="menu">
-                  <DemoButton @click="goAutoPlay" button_size="max" :button_status="(state.id == -1 ? 'cprimary' : 'csecondary')" class="menu-AutoPlay">自由弹奏</DemoButton>
-                  <DemoButton @click="goForum" button_size="max" :button_status="(state.id == 0 ? 'cprimary' : 'csecondary')" class="menu-Forum">学习论坛</DemoButton>
-                  <DemoButton @click="goPhoto" button_size="max" :button_status="(state.id == 1 ? 'cprimary' : 'csecondary')" class="menu-Music">曲谱中心</DemoButton>
-                  <!-- <DemoButton @click="changePage(2)" button_size="max" :button_status="(id == 2 ? 'cprimary' : 'csecondary')" class="menu-Video">琴音分享</DemoButton> -->
-              </div>
-            <div class="user">
-              <div class="user-head" @click="goPerson"></div>
-            </div>
-        </div>
-
-        <PanelsMain v-show="hideNavBar != true"></PanelsMain>
-        <NoteBar></NoteBar>
-        <PianoFooter></PianoFooter>
-
+  <label>导航栏：</label>
+  <xwButton :value="state.hideNavBar" @change="handleHideNavBarChange" />
+  <div class="auto-play">
+    <div class="top-bar" v-show="hideNavBar != true">
+      <div class="logo">
+        <img src="@/assets/images/piano.png" class="logo-img" />
+        <p class="logo-name">钢琴知识学习系统</p>
+      </div>
+      <div class="menu">
+        <DemoButton
+          @click="goAutoPlay"
+          button_size="max"
+          :button_status="state.id == -1 ? 'cprimary' : 'csecondary'"
+          class="menu-AutoPlay"
+          >自由弹奏</DemoButton
+        >
+        <DemoButton
+          @click="goForum"
+          button_size="max"
+          :button_status="state.id == 0 ? 'cprimary' : 'csecondary'"
+          class="menu-Forum"
+          >学习论坛</DemoButton
+        >
+        <DemoButton
+          @click="goPhoto"
+          button_size="max"
+          :button_status="state.id == 1 ? 'cprimary' : 'csecondary'"
+          class="menu-Music"
+          >曲谱中心</DemoButton
+        >
+        <!-- <DemoButton @click="changePage(2)" button_size="max" :button_status="(id == 2 ? 'cprimary' : 'csecondary')" class="menu-Video">琴音分享</DemoButton> -->
+      </div>
+      <div class="user">
+        <div class="user-head" @click="goPerson" />
+      </div>
     </div>
+
+    <PanelsMain v-show="hideNavBar != true" />
+    <NoteBar />
+    <PianoFooter />
+  </div>
 </template>
 
 <script>
 // 引入组件
 // import HeaderBar from '@/components/HeaderBar.vue'
-import PianoFooter from '@/components/PianoFooter.vue'
-import NoteBar from '@/components/PianoComponets/piano_src/piano_components/NoteBar/NoteBar.vue'
-import DemoButton from '@/components/DemoButton.vue'
-import PanelsMain from '@/components/PianoComponets/piano_src/piano_components/Setting/PanelsMain.vue'
+import PianoFooter from '@/components/PianoFooter.vue';
+import NoteBar from '@/components/PianoComponets/piano_src/piano_components/NoteBar/NoteBar.vue';
+import DemoButton from '@/components/DemoButton.vue';
+import PanelsMain from '@/components/PianoComponets/piano_src/piano_components/Setting/PanelsMain.vue';
 
 import { resize } from '../components/PianoComponets/piano_src/piano_components/size';
 import xwButton from '../components/PianoComponets/piano_src/piano_components/Setting/comp/xw-switch.vue';
-import { inject } from 'vue'
-import {signIpApi} from '@/api/index'
+import { inject } from 'vue';
+import { signIpApi } from '@/api/index';
 export default {
-    
-    data(){
-      return{
-        classObject: {
-          'cprimary': true,
-          'csecondary':  false,
-        },
-        // id: -1,
-      }
+  data() {
+    return {
+      classObject: {
+        cprimary: true,
+        csecondary: false,
+      },
+      // id: -1,
+    };
+  },
+
+  components: {
+    // 注册组件
+    PanelsMain,
+    NoteBar,
+    PianoFooter,
+    DemoButton,
+    xwButton,
+    // HeaderBar,
+  },
+
+  // 在这里，state 计算属性依赖于 this.$store.state，因此当 Vuex store 的状态发生变化时，state 会自动更新。
+  // 通过这种方式，组件可以轻松地访问 Vuex store 中的状态，并且能够实时响应状态的变化。
+  computed: {
+    state() {
+      const store = inject('store');
+      return store.state;
+    },
+    id() {
+      return this.$store.state.id;
+    },
+    user() {
+      return this.$store.state.user;
     },
 
-    components:{
-        // 注册组件
-        PanelsMain,
-        NoteBar,
-        PianoFooter,
-        DemoButton,
-        xwButton,
-        // HeaderBar,
+    hideNavBar() {
+      return this.$store.state.hideNavBar;
+    },
+  },
+  created() {
+    // if(! this.user) this.getUserIp()
+  },
+  mounted() {},
+
+  methods: {
+    getUserIp() {
+      signIpApi()
+        .then((res) => {
+          console.log(res);
+          let user = {
+            id: res.ip,
+          };
+          this.$store.commit('getUser', user);
+        })
+        .catch((error) => {
+          console.error('Error fetching user:', error);
+        });
+    },
+    // 点击去往自由弹奏
+    goAutoPlay() {
+      this.state.id = -1;
+      this.$router.push('/AutoPlay');
+    },
+    // 点击去往学习论坛
+    goForum() {
+      this.state.id = 0;
+      this.$router.push('/CardPage');
     },
 
-    // 在这里，state 计算属性依赖于 this.$store.state，因此当 Vuex store 的状态发生变化时，state 会自动更新。
-    // 通过这种方式，组件可以轻松地访问 Vuex store 中的状态，并且能够实时响应状态的变化。
-    computed: {
-        state() {
-            const store = inject('store')
-            return store.state;
-        },
-        id(){
-            return this.$store.state.id
-        },
-        user(){
-            return this.$store.state.user
-        },
-        
-        hideNavBar() {
-          return this.$store.state.hideNavBar;
-        },
+    // 点击去往曲谱中心
+    goPhoto() {
+      this.state.id = 1;
+      this.$router.push('/PhotoPage');
     },
-    created(){
-      // if(! this.user) this.getUserIp()
+    // 去往个人中心
+    goPerson() {
+      this.$router.push('/person');
     },
-    mounted(){
+    handleHideNavBarChange(newValue) {
+      this.state.hideNavBar = newValue;
+      this.$nextTick(resize);
     },
-
-    methods:{
-        getUserIp(){
-          signIpApi().then((res) => {
-              console.log(res);
-              let user = {
-                  id: res.ip,
-              }
-              this.$store.commit('getUser', user)
-          }).catch((error) => {
-              console.error("Error fetching user:", error);
-          });
-        },
-        // 点击去往自由弹奏
-        goAutoPlay(){
-          this.state.id = -1;
-          this.$router.push('/AutoPlay')
-        },
-        // 点击去往学习论坛
-        goForum(){
-            this.state.id = 0;
-            this.$router.push('/CardPage')
-        },
-        
-        // 点击去往曲谱中心
-        goPhoto(){
-          this.state.id = 1;
-          this.$router.push('/PhotoPage')
-        },
-        // 去往个人中心
-        goPerson(){
-          this.$router.push('/person')
-        }, 
-        handleHideNavBarChange(newValue) {
-          this.state.hideNavBar = newValue;
-          this.$nextTick(resize);
-        },
-    }
-}
-    
+  },
+};
 </script>
 <style lang="less" scoped>
-.auto-play{
+.auto-play {
   width: 100%;
   height: 575px;
   background: white;
 
-  .top-bar{
+  .top-bar {
     width: 100%;
     height: 60px;
     padding: 0 30px;
@@ -156,49 +171,47 @@ export default {
     justify-content: space-between;
     align-items: center;
 
-    .logo{
+    .logo {
       width: 215px;
       display: flex;
       align-items: center;
-      .logo-name{
-        font-size:20px;
-        color:@gray-1;
+      .logo-name {
+        font-size: 20px;
+        color: @gray-1;
         padding-left: 10px;
         font-weight: 600;
       }
     }
 
-    .user{
+    .user {
       width: 200px;
-      .user-head{
+      .user-head {
         float: right;
         border-radius: 50%;
-        height:36px;
-        width:36px;
+        height: 36px;
+        width: 36px;
         background-color: deepskyblue;
       }
     }
-
   }
-  .logo-img{
+  .logo-img {
     width: 45px;
     height: 30px;
   }
-  .logo-name{
+  .logo-name {
     font-size: @font-size-14;
   }
 
-  .menu{
-    .menu-AutoPlay{
+  .menu {
+    .menu-AutoPlay {
       margin-right: 24px;
     }
-    .menu-Forum{
+    .menu-Forum {
       margin-right: 24px;
     }
-    .menu-Music{
+    .menu-Music {
       margin-right: 24px;
     }
   }
 }
- 
 </style>

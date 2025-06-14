@@ -19,9 +19,7 @@ export const size = {
 };
 
 export function resize() {
-  const {
-    piano, noteBar, keyboard, settingsPanel,
-  } = comps;
+  const { piano, noteBar, keyboard, settingsPanel } = comps;
   if (piano && piano.$refs && piano.$refs.piano) {
     const { clientWidth, clientHeight } = piano.$refs.piano;
     const s = clientWidth / keyboardWidth;
@@ -80,7 +78,6 @@ export function setMainPanel(comp) {
   resize();
 }
 
-
 // // runtime.isClient 为真，那么表示当前代码正在客户端环境（浏览器）中执行。在这种情况下，代码会添加一个 resize 事件监听器到 window 对象上。
 // // 这个事件监听器会在浏览器窗口大小发生变化时触发，并调用名为 resize 的函数。
 // // 通过这段代码，你可以在客户端环境中监听窗口大小的变化，从而执行一些响应式的操作或者调整界面布局。
@@ -97,4 +94,3 @@ export function setMainPanel(comp) {
 //   comps.piano = pn;
 //   resize();
 // }
-

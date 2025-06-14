@@ -10,7 +10,7 @@ export default class Player {
     }
     // console.log(soundfont);
     for (let i = 1; i < 89; i += 1) {
-      // key2noteList 
+      // key2noteList
       // 该数组存储了键盘上每个按键对应的音符名称
       const name = key2noteList[i];
       // 使用这些音符名称在 soundfont 对象中查找相应的音频文件 URL
@@ -42,7 +42,6 @@ export default class Player {
     }
   }
 
-  
   noteOff(id) {
     // 检查是否存在音频元素
     if (this.audios[id]) {

@@ -1,6 +1,6 @@
 <template>
   <div class="xw-switch" :class="{ 'on-state': !value }" @click="trigger">
-    <div class="bar"></div>
+    <div class="bar" />
   </div>
 </template>
 

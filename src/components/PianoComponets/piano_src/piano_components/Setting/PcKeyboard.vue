@@ -7,12 +7,12 @@
           :key="index"
           :class="{
             disable: item.d == 1,
-            selec: editState && item.c == selectedKey
+            selec: editState && item.c == selectedKey,
           }"
           :style="{
             width: item.w ? `${item.w}px` : '',
             height: item.h ? `${item.h}px` : '',
-            marginLeft: item.m ? `${item.m}px` : ''
+            marginLeft: item.m ? `${item.m}px` : '',
           }"
           :name="item.c"
           :disable="item.d == 1"
@@ -30,7 +30,7 @@
       <div class="row">
         <span>您可以 </span>
         <xw-button type="primary" tabindex="0" @click="editState = !editState">
-          {{ editState ? "退出编辑" : "编辑" }}
+          {{ editState ? '退出编辑' : '编辑' }}
         </xw-button>
         <span> 上面的映射</span>
       </div>
@@ -39,14 +39,12 @@
           PS:
           鼠标或键盘在上方选中一个电脑键之后，然后用鼠标在下方的钢琴键盘中按下对应的键，即可进行映射和绑定。
         </p>
-        <div v-if="selectedKey === 0">
-          请用鼠标或者电脑键盘按下一个键
-        </div>
+        <div v-if="selectedKey === 0">请用鼠标或者电脑键盘按下一个键</div>
         <div v-else>
           <span>已选中 </span>
           <div
             :style="{
-              width: getPcKeyWidth(selectedKey)
+              width: getPcKeyWidth(selectedKey),
             }"
             class="select-key"
           >
@@ -58,34 +56,24 @@
           <span>{{
             getName(selectedKey)
               ? `已经设置为钢琴第 ${getKeyIndex(selectedKey)} 个键，音名：${getName(selectedKey)}`
-              : "未绑定钢琴键"
+              : '未绑定钢琴键'
           }}</span>
         </div>
         <div class="btn-group">
           <span>全部</span>
-          <xw-button type="primary" @click="degradeYin">
-            降低 (降调)
-          </xw-button>
+          <xw-button type="primary" @click="degradeYin"> 降低 (降调) </xw-button>
           <span>半个音高，</span>
           <span>全部</span>
-          <xw-button type="primary" @click="upgradeYin">
-            升高 (升调)
-          </xw-button>
+          <xw-button type="primary" @click="upgradeYin"> 升高 (升调) </xw-button>
           <span>半个音高，</span>
           <span>这里可以</span>
-          <xw-button type="primary" @click="clearConfig()">
-            清空
-          </xw-button>
+          <xw-button type="primary" @click="clearConfig()"> 清空 </xw-button>
           <span>上面的配置，</span>
           <span>还可以</span>
-          <xw-button type="primary" @click="restoreConfig()">
-            还原
-          </xw-button>
+          <xw-button type="primary" @click="restoreConfig()"> 还原 </xw-button>
           <span>成默认配置(C大调纯白键版)，</span>
           <span>或者是</span>
-          <xw-button type="primary" @click="restoreConfig2()">
-            还原
-          </xw-button>
+          <xw-button type="primary" @click="restoreConfig2()"> 还原 </xw-button>
           <span>成以前版本的默认配置(C大调包括黑键版)。</span>
         </div>
       </div>
@@ -110,9 +98,7 @@
  */
 import pcKeyboardSave from './pc-keyboard-save.vue';
 import xwButton from '../../piano_comp/xw-comp/xw-button.vue';
-import {
-  onEvent, offEvent, keyDown, keyUp, getKeyConfig,
-} from '../Footer/keyboard-pc';
+import { onEvent, offEvent, keyDown, keyUp, getKeyConfig } from '../Footer/keyboard-pc';
 import { keyNameList } from '../Footer/keyboard';
 import { keypress } from '../Footer/piano-control';
 import pckey2key, { pckey2keyType2 } from './pckey-key';

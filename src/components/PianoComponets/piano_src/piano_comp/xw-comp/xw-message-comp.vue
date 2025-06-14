@@ -1,33 +1,16 @@
 <template>
-    <div
-        class="xw-msg-fixed"
-    >
-        <transition-group
-            name="msg-list"
-            class="msg-list"
-            tag="div"
-        >
-            <div
-                v-for="(item, index) in msgList"
-                :key="item.id"
-                class="msg-list-item"
-            >
-                <div
-                    class="msg-content-wrapper"
-                >
-                    <div
-                        class="msg-content"
-                    >
-                        <p>{{ item.content }}</p>
-                        <span
-                            class="msg-close iconfont icon-close"
-                            @click="close(index)"
-                        />
-                    </div>
-                </div>
-            </div>
-        </transition-group>
-    </div>
+  <div class="xw-msg-fixed">
+    <transition-group name="msg-list" class="msg-list" tag="div">
+      <div v-for="(item, index) in msgList" :key="item.id" class="msg-list-item">
+        <div class="msg-content-wrapper">
+          <div class="msg-content">
+            <p>{{ item.content }}</p>
+            <span class="msg-close iconfont icon-close" @click="close(index)" />
+          </div>
+        </div>
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 <script>
@@ -57,11 +40,7 @@ export default {
     };
   },
   methods: {
-    open({
-      icon,
-      content,
-      duration,
-    }) {
+    open({ icon, content, duration }) {
       const t = {
         id: listid++,
         content,

@@ -14,8 +14,8 @@
       </a>
     </menu>
 
-    <section class="st-cont" >
-      <VisitPiano v-if="select === 0"/>
+    <section class="st-cont">
+      <VisitPiano v-if="select === 0" />
       <settings v-if="select === 1" />
       <pc-keyboard v-if="select === 2" />
     </section>
@@ -49,9 +49,7 @@ export default {
     };
   },
 
-  computed:{
-    
-  },
+  computed: {},
 
   mounted() {
     setMainPanel(this);

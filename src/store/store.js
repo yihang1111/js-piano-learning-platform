@@ -1,8 +1,7 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 // 导入 Vuex 库，Vuex 是 Vue.js 的状态管理库，用于管理应用程序中的共享状态。
 
 import pckey2key from './pckey-key';
-
 
 export default createStore({
   state() {
@@ -17,12 +16,12 @@ export default createStore({
         pckey2key: pckey2key(),
       },
       user: '',
-      hello:{string: '游客'},
-      url:'',
+      hello: { string: '游客' },
+      url: '',
       showComponentC: true,
       showComponentP: false,
       id: 1,
-    }
+    };
   },
 
   mutations: {
@@ -30,16 +29,16 @@ export default createStore({
       state.mainDoc = data && data.doc;
     },
     // 获取用户标识
-    getUser(state, user){
-      state.user = user
+    getUser(state, user) {
+      state.user = user;
     },
     // 欢迎语
-    getHello(state, hello){
-      state.hello = hello
+    getHello(state, hello) {
+      state.hello = hello;
     },
     setId(state, newId) {
       state.id = newId; // 更新用户 ID
-    }
+    },
   },
 
   actions: {},
@@ -47,9 +46,8 @@ export default createStore({
   // 如果你想添加 getters，也可以在这里定义
   getters: {
     // getter 函数可以在这里定义
-  }
-})
-
+  },
+});
 
 // export default function () {
 //   const store = createStore({
