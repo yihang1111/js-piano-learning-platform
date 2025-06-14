@@ -1,7 +1,5 @@
 # 打开前端项目启动 npm run serve
 
-# 后端项目位置 C:\Users\Yu\Desktop\郑州大学\毕设demo\server> 
-
 # 打开后端项目
  
 - 在项目根目录运行`npm install`安装依赖（包括mysql、express等）npm install -g nodemon
