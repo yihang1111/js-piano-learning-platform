@@ -1,40 +1,28 @@
 <template>
-    <div
-        v-if="show"
-        class="unsupported"
-    >
-        <div class="wrapper">
-            <div
-                class="cont"
-            >
-                <h2>{{ title }}</h2>
-                <p>原因是：{{reason}}</p>
-                <p>要不试一试下面的浏览器吧</p>
-                <div
-                    class="suggest"
-                >
-                    <a
-                        v-for="item in browers"
-                        :key="item.name"
-                        :href="item.href"
-                        target="_blank"
-                        class="item"
-                    >
-                        <img
-                            :src="item.img"
-                        >
-                        <div>{{ item.name }}</div>
-                    </a>
-                </div>
-                <div class="insist-use">
-                    <a
-                        href="javascript:void(0)"
-                        @click="show=false"
-                    >我要继续浏览</a>
-                </div>
-            </div>
+  <div v-if="show" class="unsupported">
+    <div class="wrapper">
+      <div class="cont">
+        <h2>{{ title }}</h2>
+        <p>原因是：{{ reason }}</p>
+        <p>要不试一试下面的浏览器吧</p>
+        <div class="suggest">
+          <a
+            v-for="item in browers"
+            :key="item.name"
+            :href="item.href"
+            target="_blank"
+            class="item"
+          >
+            <img :src="item.img" />
+            <div>{{ item.name }}</div>
+          </a>
         </div>
+        <div class="insist-use">
+          <a href="javascript:void(0)" @click="show = false">我要继续浏览</a>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -125,5 +113,4 @@ export default {
         text-align right;
     }
 }
-
 </style>

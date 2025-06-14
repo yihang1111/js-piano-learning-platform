@@ -1,7 +1,7 @@
 <template>
   <div class="midi-access">
     <div v-if="support" class="support">
-      <xw-button @click="doConnect()">{{ linked ? "刷新" : "立即连接" }}</xw-button>
+      <xw-button @click="doConnect()">{{ linked ? '刷新' : '立即连接' }}</xw-button>
       <xw-button v-if="linked" @click="doDisconnect()">断开</xw-button>
       <span v-if="!linked" class="tips"
         >可将midi键盘或者电钢琴通过USB连接到您的电脑或手机后点击左侧连接按钮</span
@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import {
-  isSupport, connect, disConnect, getMidiParse,
-} from './midi-peripheral';
+import { isSupport, connect, disConnect, getMidiParse } from './midi-peripheral';
 import xwButton from '../../piano_comp/xw-comp/xw-button.vue';
 
 export default {

@@ -17,10 +17,6 @@ export function isIE() {
   return false;
 }
 
-export function isChorme() {
+export function isChorme() {}
 
-}
-
-export function isAndroid() {
-
-}
+export function isAndroid() {}

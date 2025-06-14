@@ -1,13 +1,10 @@
 <template>
-    <div
-        class="xw-button-group"
-    >
-        <slot />
-    </div>
+  <div class="xw-button-group">
+    <slot />
+  </div>
 </template>
 <script>
-export default {
-};
+export default {};
 </script>
 <style lang="stylus">
 .xw-button-group {

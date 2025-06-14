@@ -1,23 +1,14 @@
 <template>
-    <transition
-        name="loading-fade"
-    >
-        <div
-            v-if="loading"
-            class="xw-loading"
-        >
-            <div class="loading-icon">
-                <i
-                    v-for="n in tnum"
-                    :key="n"
-                    :class="`ld-${n}`"
-                />
-            </div>
-            <div class="custom-text">
-                <slot />
-            </div>
-        </div>
-    </transition>
+  <transition name="loading-fade">
+    <div v-if="loading" class="xw-loading">
+      <div class="loading-icon">
+        <i v-for="n in tnum" :key="n" :class="`ld-${n}`" />
+      </div>
+      <div class="custom-text">
+        <slot />
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -28,8 +19,8 @@ export default {
       default: true,
     },
     /**
-         * 球球的数量
-         */
+     * 球球的数量
+     */
     num: {
       type: Number,
       default: 3,
@@ -107,5 +98,4 @@ for idx in 1..10
         transform scale(0.1) translate(0, 0)
     }
 }
-
 </style>
