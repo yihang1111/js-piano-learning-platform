@@ -1,19 +1,12 @@
 <template>
-    <div>
-        <table>
-            <thead>
-
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-    </div>
+  <div>
+    <table>
+      <thead />
+      <tbody />
+    </table>
+  </div>
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<style lang="stylus">
-</style>
+<style lang="stylus"></style>

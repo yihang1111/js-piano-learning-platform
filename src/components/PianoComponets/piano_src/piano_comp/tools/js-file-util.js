@@ -1,4 +1,3 @@
-
 /**
  * @param {String} content
  * @param {String} fileName

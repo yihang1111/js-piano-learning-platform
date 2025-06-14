@@ -13,23 +13,17 @@
         @blur="inputBlur"
       />
       <span> 作为名称</span>
-      <xw-button type="primary" @click="save()">
-        保存
-      </xw-button>
+      <xw-button type="primary" @click="save()"> 保存 </xw-button>
       <span>至下方的本地存档，</span>
       <span>也可以</span>
-      <xw-button type="primary" @click="saveFile()">
-        另存为
-      </xw-button>
+      <xw-button type="primary" @click="saveFile()"> 另存为 </xw-button>
       <span>本地.xkmp文件，</span>
       <span>还可以</span>
-      <xw-button type="primary" @click="chooseFile()">
-        读取
-      </xw-button>
+      <xw-button type="primary" @click="chooseFile()"> 读取 </xw-button>
       <span>本地保存的.xkmp文件。</span>
     </div>
     <h4 class="title">
-      {{ list.length === 0 ? "本地暂无配置存档" : "您的配置存档:" }}
+      {{ list.length === 0 ? '本地暂无配置存档' : '您的配置存档:' }}
     </h4>
     <transition-group name="save-list" class="save-list" tag="div">
       <div v-for="(item, index) in list" :key="item.key" class="save-list-item">
@@ -39,12 +33,8 @@
           </div>
           <div class="time">保存于：{{ howLong(item.time) }}</div>
           <div class="btns">
-            <xw-button type="danger" @click="remove(index)">
-              删除
-            </xw-button>
-            <xw-button @click="use(index)">
-              使用
-            </xw-button>
+            <xw-button type="danger" @click="remove(index)"> 删除 </xw-button>
+            <xw-button @click="use(index)"> 使用 </xw-button>
           </div>
         </div>
       </div>

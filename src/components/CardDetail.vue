@@ -1,154 +1,153 @@
 <template>
-    <div class="card-detail">
+  <div class="card-detail">
+    <TalkCard :cards="card" :id="id" class="card" />
 
-        <TalkCard :cards="card" :id="id" class="card"></TalkCard>
-
-        <div class="form">
-            <textarea class="message" placeholder="评论一下..." v-model="discuss"></textarea>
-            <div class="btn">
-                <input type="text" class="name"  placeholder="签名" v-model="name">
-                <DemoButton class="comm-btn" :class="{noteallowed: !isDis}" @click="submit">评论</DemoButton>
-            </div>     
-        </div>
-
-        <p class="comment-top">评论 {{ card.comcount[0].count }}</p>
-        <div class="comment-main">
-            <div class="comment-li" v-for="(item,index) in comments" :key="index">
-                <div class="user-head" :style="{backgroundImage:portrait[item.imgurl]}"></div>
-                <div class="comment-right">
-                    <div class="right-top">
-                        <p class="name">{{ item.name }}</p>
-                        <p class="time"> {{ switchdate(item.moment) }}</p>
-                    </div>
-                    <div class="right-mesg">{{ item.comment }}</div>
-                </div>
-            </div>
-            <!-- <p class="more" @click="getComment" v-show="false">加载更多</p> -->
-        </div>
+    <div class="form">
+      <textarea class="message" placeholder="评论一下..." v-model="discuss" />
+      <div class="btn">
+        <input type="text" class="name" placeholder="签名" v-model="name" />
+        <DemoButton class="comm-btn" :class="{ noteallowed: !isDis }" @click="submit"
+          >评论</DemoButton
+        >
+      </div>
     </div>
+
+    <p class="comment-top">评论 {{ card.comcount[0].count }}</p>
+    <div class="comment-main">
+      <div class="comment-li" v-for="(item, index) in comments" :key="index">
+        <div class="user-head" :style="{ backgroundImage: portrait[item.imgurl] }" />
+        <div class="comment-right">
+          <div class="right-top">
+            <p class="name">{{ item.name }}</p>
+            <p class="time">{{ switchdate(item.moment) }}</p>
+          </div>
+          <div class="right-mesg">{{ item.comment }}</div>
+        </div>
+      </div>
+      <!-- <p class="more" @click="getComment" v-show="false">加载更多</p> -->
+    </div>
+  </div>
 </template>
 <script>
- import TalkCard from './TalkCard.vue';   
- import DemoButton from './DemoButton.vue';
- import {portrait} from '@/utils/data'
- import {switchdate} from '@/utils/switchTime'
- import {insertCommentApi} from '@/api/index'
- import {findCommentPageApi} from '@/api/index'
- export default{
-    data(){
-        return{
-            // 评论真数据
-            comments:[],
+import TalkCard from './TalkCard.vue';
+import DemoButton from './DemoButton.vue';
+import { portrait } from '@/utils/data';
+import { switchdate } from '@/utils/switchTime';
+import { insertCommentApi } from '@/api/index';
+import { findCommentPageApi } from '@/api/index';
+export default {
+  data() {
+    return {
+      // 评论真数据
+      comments: [],
 
-            portrait,
-            switchdate,
+      portrait,
+      switchdate,
 
-            discuss:'',
-            name:'匿名',
+      discuss: '',
+      name: '匿名',
 
-            page: 1,
-            pagesize:400,
+      page: 1,
+      pagesize: 400,
+    };
+  },
+  computed: {
+    isDis() {
+      if (this.discuss && this.name) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    card() {
+      return this.cards;
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    getflag() {
+      return this.getFlag;
+    },
+  },
+  props: {
+    cards: {
+      default: {
+        like: [{ count: 0 }],
+        islike: [{ count: 0 }],
+        comcount: [{ count: 0 }],
+      },
+    },
+    id: {
+      default: 0,
+    },
+    getFlag: {
+      default: false,
+    },
+  },
+  methods: {
+    submit() {
+      if (this.isDis) {
+        let img = Math.floor(Math.random() * 14);
+        let data = {
+          postId: this.card.id,
+          userId: this.user.id,
+          moment: new Date(),
+          imgurl: img,
+          comment: this.discuss,
+          name: this.name,
+        };
+        console.log(data);
+        insertCommentApi(data).then(() => {
+          // console.log(data);
+          this.comments.unshift(data);
+          this.card.comcount[0].count++;
 
-        }
+          // 清空评论框
+          this.discuss = '';
+        });
+      }
     },
-    computed:{
-        isDis(){
-            if(this.discuss && this.name){
-                return true
-            }else{
-                return false
-            }
-        },
-        card(){
-            return this.cards
-        },
-        user(){
-            return this.$store.state.user
-        },
-        getflag(){
-            return this.getFlag
-        }
-    },
-    props:{
-        cards:{
-            default:{
-                like:[{count:0}],
-                islike:[{count:0}],
-                comcount:[{count:0}]
-            },
-        },
-        id:{
-            default:0,
-        },
-        getFlag:{
-            default:false,
-        }
-    },
-    methods:{
-        submit(){
-            if(this.isDis){
-                let img = Math.floor(Math.random() * 14)
-                let data = {
-                    postId: this.card.id, 
-                    userId: this.user.id,
-                    moment: new Date(), 
-                    imgurl: img,
-                    comment: this.discuss, 
-                    name: this.name,
-                }
-                console.log(data);
-                insertCommentApi(data).then(() => {
-                    // console.log(data);
-                    this.comments.unshift(data)
-                    this.card.comcount[0].count ++
+    // 从后端获取评论
+    getComment() {
+      // alert('wo')
+      if (this.page == 1) {
+        let data = {
+          page: this.page,
+          pagesize: this.pagesize,
+          id: this.card.id,
+        };
+        // console.log(this.card.id);
+        findCommentPageApi(data).then((res) => {
+          this.comments = this.comments.concat(res.message);
 
-                    // 清空评论框
-                    this.discuss = ''
-                })
-            }
-        },
-        // 从后端获取评论
-        getComment(){ 
-            // alert('wo')
-            if(this.page == 1){
-                let data = {
-                    page: this.page,
-                    pagesize: this.pagesize,
-                    id: this.card.id,  
-                }
-                // console.log(this.card.id);
-                findCommentPageApi(data).then((res) => {
-                    this.comments = this.comments.concat(res.message)
-                    
-                    // console.log(res.message);
-                    // console.log(res.message.length,this.nowpage);
-                    // if(res.message.length == this.pagesize){
-                    //     this.page ++
-                    // }else{
-                    //     this.page = 0
-                    // } 
-                    // console.log(this.comments);   
-                })
-            }
-        },
+          // console.log(res.message);
+          // console.log(res.message.length,this.nowpage);
+          // if(res.message.length == this.pagesize){
+          //     this.page ++
+          // }else{
+          //     this.page = 0
+          // }
+          // console.log(this.comments);
+        });
+      }
     },
-    mounted() {
-        this.getComment(); // 请求新数据
+  },
+  mounted() {
+    this.getComment(); // 请求新数据
+  },
+  watch: {
+    card() {
+      this.page = 1;
+      this.comments = [];
+      this.getComment();
     },
-    watch:{
-        card(){
-            this.page = 1;
-            this.comments = [];
-            this.getComment()
-        }
-    },
+  },
 
-    components:{
-        TalkCard,
-        DemoButton,
-    },
- }
- 
+  components: {
+    TalkCard,
+    DemoButton,
+  },
+};
 </script>
 <style lang="less" scoped>
 .card-detail{
@@ -159,13 +158,13 @@
         border: 1px solid @primary-color;
     }
     .top-btn{
-        
+
         position: fixed;
         background: white;
         top: 52px;
         width: 100%;
         clip-path: inset(0 377px 0 0);
-        
+
         padding: 10px;
         display: flex;
         .revoke{
@@ -183,7 +182,7 @@
             height: 25px;
             margin-left: 850px;
             padding-left: 8px;
-            
+
             cursor:pointer;
             transition: @trans;
             &:hover{
@@ -217,7 +216,7 @@
                 box-sizing: border-box;
                 border: #dfdfdf 1px solid;
                 background: none;
-                
+
                 padding: 8px;
                 padding-bottom: 2px;
                 margin-top: 8px;
@@ -277,7 +276,7 @@
                     text-overflow: ellipsis; /* 使用省略号表示文本被截断 */
                 }
             }
-            
+
         }
 
         .more{

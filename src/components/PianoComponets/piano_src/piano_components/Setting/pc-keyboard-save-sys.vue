@@ -1,8 +1,6 @@
 <template>
   <div class="pc-keyboard-save">
-    <h4 class="title">
-      系统默认键盘配置:
-    </h4>
+    <h4 class="title">系统默认键盘配置:</h4>
     <div v-if="list.length > 0">
       <transition-group name="save-list" class="save-list" tag="div">
         <div v-for="(item, index) in list" :key="item.key" class="save-list-item">
@@ -16,9 +14,7 @@
             <div class="btns">
               <!-- 这是一个自定义的按钮组件，它被点击时会触发 use(index) 方法。按钮上显示的文本是“使用”。 -->
               <!-- 会调用 Vue 实例中 use 方法，并将当前按钮的索引 index 作为参数传递给 use 方法。 -->
-              <xw-button @click="use(index)">
-                使用
-              </xw-button>
+              <xw-button @click="use(index)"> 使用 </xw-button>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-underscore-dangle */
 export default {
-
   // _keyStr是一个包含了 Base64 字符集的字符串，用于将 Base64 编码后的数据转换回原始数据。
   // 它包含了大写字母、小写字母和数字，以及两个额外的字符 "+" 和 "/"，总共 64 个字符。
   _keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
@@ -51,8 +50,13 @@ export default {
     if (lkey2 == 64) bytes--; // padding chars, so skip
 
     let uarray;
-    let chr1; let chr2; let chr3;
-    let enc1; let enc2; let enc3; let enc4;
+    let chr1;
+    let chr2;
+    let chr3;
+    let enc1;
+    let enc2;
+    let enc3;
+    let enc4;
     let i = 0;
     let j = 0;
 

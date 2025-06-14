@@ -1,7 +1,5 @@
 <template>
-  <div class="visit-ct">
-    
-  </div>
+  <div class="visit-ct" />
 </template>
 
 <script>
@@ -16,9 +14,7 @@ export default {
     },
   },
 
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 

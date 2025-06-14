@@ -1,4 +1,3 @@
-
 function t0(n = 0) {
   return n < 10 ? `0${n}` : `${n}`;
 }
@@ -34,7 +33,8 @@ export function howLong(time) {
 
   const distanc = now - date;
   if (distanc > 0) {
-    if (distanc < 1000 * 60 * 3) { // 3分钟内
+    if (distanc < 1000 * 60 * 3) {
+      // 3分钟内
       return '刚刚';
     }
     if (distanc < 1000 * 60 * 60) {

@@ -1,17 +1,14 @@
 <template>
-    <transition-group
-        name="xw-pagination"
-        class="xw-pagination"
-        tag="nav"
+  <transition-group name="xw-pagination" class="xw-pagination" tag="nav">
+    <xw-button
+      v-for="item in btnList"
+      :key="item.id"
+      :type="item.type"
+      :class="{ select: pageIndex == item.text }"
+      @click="pageChange(item.n)"
+      >{{ item.text }}</xw-button
     >
-        <xw-button
-            v-for="item in btnList"
-            :key="item.id"
-            :type="item.type"
-            :class="{select: pageIndex == item.text}"
-            @click="pageChange(item.n)"
-        >{{ item.text }}</xw-button>
-    </transition-group>
+  </transition-group>
 </template>
 
 <script>
@@ -67,7 +64,7 @@ export default {
 
       if (min > 2) {
         let n = min - 3;
-        n < 2 ? n = 2 : 0;
+        n < 2 ? (n = 2) : 0;
         list.unshift({
           id: n,
           text: '···',
@@ -77,7 +74,7 @@ export default {
       }
       if (max < pageNum - 1) {
         let n = max + 3;
-        n > pageNum - 1 ? n = pageNum - 1 : 0;
+        n > pageNum - 1 ? (n = pageNum - 1) : 0;
         list.push({
           id: n,
           text: '···',

@@ -4,7 +4,7 @@
       ref="keyboard"
       class="keyboard"
       :style="{ transform: `scale(${scale}) translateX(-${left}px)` }"
-      :class="{ hidenum: ! cacheConf.showKbdNum }"
+      :class="{ hidenum: !cacheConf.showKbdNum }"
     >
       <div ref="blacks" class="black" />
       <div ref="whites" class="white" />
@@ -14,12 +14,12 @@
   </div>
 </template>
 <script>
-  import { offset } from '../util/index';
-  import { setKeyBoard } from '../size';
-  import { whiteDom, blackDom, getKey } from './keyboard';
-  import { keypress } from './piano-control';
+import { offset } from '../util/index';
+import { setKeyBoard } from '../size';
+import { whiteDom, blackDom, getKey } from './keyboard';
+import { keypress } from './piano-control';
 
-  import { computed } from 'vue'
+import { computed } from 'vue';
 export default {
   data() {
     return {
@@ -199,7 +199,9 @@ export default {
                 const x = pst.pageX - this.offsetLeft;
                 const y = pst.pageY - this.offsetTop;
                 const key = getKey(x / this.scale + this.left, y / this.scale);
-                if (key) { keys.push(key); }
+                if (key) {
+                  keys.push(key);
+                }
               }
               keypress.down(keys, true, 1);
               if (touches.length === 0) {

@@ -2,7 +2,6 @@
 // 这意味着在当前模块中可以使用 MIDIOBJ 这个变量来引用 ./midi 模块导出的 MIDI 对象。
 import { MIDI as MIDIOBJ } from './midi';
 
-
 import { loadSoundfont as loadSoundfontModule } from './script-loader';
 
 export const MIDI = MIDIOBJ;
